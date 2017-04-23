@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Cloud Input Test</title>
+</head>
+<body>
+<script>
+function toggleStatus(e) {
+	if (e.innerHTML === "Close") {
+		e.innerHTML = "Open";
+	} else {
+		e.innerHTML = "Close";
+	}
+}
+function toggleCloudInput()
+{
+	if (!document.getElementById('cloud_input_1.0')) {
+		var e = document.createElement('script');
+		e.setAttribute('src', dirname(document.URL) + '/cloud_input_init.js');
+		e.setAttribute('id', 'cloud_input_1.0_init');
+		document.body.appendChild(e);
+	} else {
+		CloudInput.toggleOnOff();
+	}
+	toggleStatus(document.getElementById("status"));
+}
+function dirname(path) {
+	return path.replace(/\\/g,'/').replace(/\/[^\/]*$/, '');
+}
+window.onload = function() {
+	var e = document.getElementById("bookmark");
+	e.href = "javascript:(function(){var%20e=document.createElement('script');e.src='"
+	+ dirname(document.URL) + "/cloud_input_init.js" +
+	"';e.id='cloud_input_1.0_init';document.body.appendChild(e);}())";
+}
+</script>
+<p><input type="text">
+<input type="text">
+<input type="text"></p>
+<p><textarea rows="10" cols="30"></textarea>
+<textarea rows="10" cols="30"></textarea></p>
+<p>Cloud Input: <span id="status">Close</span><br><button onclick="toggleCloudInput();">Toggle Cloud Input</button></p>
+<p><a id="bookmark" href="">Enable Cloud Input</a></p>
+</body>
+</html>
